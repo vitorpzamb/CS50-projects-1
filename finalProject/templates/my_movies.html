@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Minha Lista de Filmes
+{% endblock %}
+
+{% block main %}
+    <h2 class="mb-4">🎯 Minha Lista (quero assistir)</h2>
+
+    <ul class="list-group mb-4">
+        {% for movie in wishlist %}
+            <li class="list-group-item">{{ movie.title }}</li>
+        {% else %}
+            <li class="list-group-item text-muted">Sua lista está vazia.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Adicionar filme à lista -->
+    <h4 class="mb-3">➕ Adicionar novo filme na lista</h4>
+    <form action="/my-movies" method="post">
+        <input type="hidden" name="action" value="add">
+        <div class="mb-3">
+            <input class="form-control" name="title" placeholder="Nome do filme" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Adicionar</button>
+    </form>
+
+    <hr class="my-4">
+
+    <!-- Marcar filme como assistido -->
+    <h4 class="mb-3">✅ Marcar como assistido</h4>
+    <form action="/my-movies" method="post">
+        <input type="hidden" name="action" value="move">
+        <div class="mb-3">
+            <input class="form-control" name="title" placeholder="Nome exato do filme" required>
+        </div>
+        <div class="mb-3">
+            <input type="number" name="rating" class="form-control" placeholder="Nota (0 a 5)" min="0" max="5">
+        </div>
+        <div class="mb-3">
+            <textarea name="review" class="form-control" placeholder="Resenha (opcional)"></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Mover para assistidos</button>
+    </form>
+{% endblock %}

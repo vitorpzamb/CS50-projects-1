@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h2 class="mb-4">🎬 Filmes assistidos</h2>
+    <div class="row">
+        {% for movie in watched %}
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    {% if movie.poster_path %}
+                        <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}" style="height: 400px; object-fit: cover;">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x450?text=Sem+Imagem" class="card-img-top" alt="Sem imagem" style="height: 400px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie.title }}</h5>
+                        <p class="card-text">⭐ Avaliação: {{ movie.rating }}/5</p>
+                        <p class="card-text"><strong>Resenha:</strong> {{ movie.review }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <hr class="my-5">
+
+    <h2 class="mb-4">📌 Minha lista (quero assistir)</h2>
+    <div class="row">
+        {% for movie in wishlist %}
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    {% if movie.poster_path %}
+                        <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" class="card-img-top" alt="{{ movie.title }}" style="height: 400px; object-fit: cover;">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x450?text=Sem+Imagem" class="card-img-top" alt="Sem imagem" style="height: 400px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie.title }}</h5>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

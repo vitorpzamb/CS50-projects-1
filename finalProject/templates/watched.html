@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Adicionar Filme Assistido
+{% endblock %}
+
+{% block main %}
+    <h2 class="mb-4">🎥 Adicionar Filme Assistido</h2>
+
+    <form action="/add" method="post">
+        <input type="hidden" name="action" value="add">
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control" name="title" placeholder="Título do filme" required>
+        </div>
+        <div class="mb-3">
+            <input type="number" min="0" max="5" class="form-control" name="rating" placeholder="Nota (0 a 5)">
+        </div>
+        <div class="mb-3">
+            <textarea class="form-control" name="review" placeholder="Escreva sua resenha (opcional)"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Adicionar</button>
+    </form>
+
+    <hr class="my-4">
+
+    <h4 class="mb-3">📋 Seus filmes assistidos</h4>
+    <ul class="list-group">
+        {% for movie in watched %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ movie.title }}</strong>
+                    {% if movie.rating is not none %}
+                        – Nota: {{ movie.rating }}
+                    {% endif %}
+                </div>
+                <form action="/add" method="post" class="ms-2">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                    <button class="btn btn-sm btn-danger">Excluir</button>
+                </form>
+            </li>
+        {% else %}
+            <li class="list-group-item text-muted">Nenhum filme assistido ainda.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

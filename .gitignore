@@ -1,0 +1,11 @@
+.vscode/
+.vscode-remote/
+**/.DS_Store
+**/__pycache__/
+**/*.o
+**/*.out
+**/*.exe
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.ipynb_checkpoints
